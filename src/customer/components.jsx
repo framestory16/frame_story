@@ -10,7 +10,9 @@ export function Header() {
   const { pathname } = useLocation()
   const ig = instagramUrl(settings.instagram)
 
-  useEffect(() => setOpen(false), [pathname])
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
 
   return (
     <>
