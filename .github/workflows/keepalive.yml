@@ -1,12 +1,15 @@
 # Supabase pauses free projects after 7 days without activity.
 # This reads one row every 2 days so the project never goes idle.
-# (Backup for the cron-job.org ping — see README.)
+# Runs on GitHub's servers — nothing to keep running on your computer.
 name: Keep Supabase awake
 
 on:
   schedule:
     - cron: '17 3 */2 * *'
   workflow_dispatch:
+
+permissions:
+  actions: write
 
 jobs:
   ping:
@@ -16,3 +19,10 @@ jobs:
         run: |
           curl -fsS "https://qriipkojtrgerlvexszo.supabase.co/rest/v1/settings?select=id&limit=1" \
             -H "apikey: sb_publishable_3-WiHPpqxUeDNlZfwHpGpg_p7ClzRsP"
+
+      # GitHub disables scheduled workflows in public repos after 60 days
+      # without commits. Re-enabling it on every run keeps it alive.
+      - name: Keep this schedule enabled
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/keepalive.yml/enable"

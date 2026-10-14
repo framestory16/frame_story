@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useShop } from './store.jsx'
-import { priceLabel, formatPrice, instagramUrl } from '@shared/utils.js'
+import { priceLabel, formatPrice, instagramUrl, asset } from '@shared/utils.js'
 import { IconInstagram, IconMenu, IconX, IconPhone, IconPin, IconArrowRight } from '@shared/icons.jsx'
 
 // Fades/slides children in when they scroll into view.
@@ -62,7 +62,7 @@ export function Header() {
       <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
         <div className="container header-inner">
           <Link to="/" className="brand" aria-label={`${settings.shop_name} home`}>
-            <img src="/logo-192.png" alt="" width="52" height="52" />
+            <img src={asset('logo-192.png')} alt="" width="52" height="52" />
             <span className="brand-text">
               <span className="brand-name">{settings.shop_name}</span>
               <span className="brand-sub">Every frame tells a story</span>
@@ -119,10 +119,10 @@ export function Footer() {
   const ig = instagramUrl(settings.instagram)
   return (
     <footer className="site-footer">
-      <img src="/floral.png" alt="" className="footer-floral" aria-hidden="true" loading="lazy" />
+      <img src={asset('floral.png')} alt="" className="footer-floral" aria-hidden="true" loading="lazy" />
       <div className="container footer-grid">
         <div className="footer-brand">
-          <img src="/logo-512.png" alt={settings.shop_name} width="120" height="120" loading="lazy" />
+          <img src={asset('logo-512.png')} alt={settings.shop_name} width="120" height="120" loading="lazy" />
           <p className="footer-tagline">{settings.tagline}</p>
           {ig && (
             <a href={ig} target="_blank" rel="noreferrer" className="btn btn-outline btn-sm">
@@ -230,7 +230,7 @@ export function CategoryCard({ category, index }) {
           <img src={category.image_url} alt="" loading="lazy" />
         ) : (
           <div className="cat-placeholder">
-            <img src="/floral.png" alt="" loading="lazy" />
+            <img src={asset('floral.png')} alt="" loading="lazy" />
           </div>
         )}
         <span className="cat-num">{String(index + 1).padStart(2, '0')}</span>
@@ -261,7 +261,7 @@ export function ProductCard({ product }) {
             </>
           ) : (
             <div className="cat-placeholder">
-              <img src="/floral.png" alt="" loading="lazy" />
+              <img src={asset('floral.png')} alt="" loading="lazy" />
             </div>
           )}
           <span className="product-quick">
@@ -316,7 +316,7 @@ export function SkeletonGrid({ count = 4 }) {
 export function EmptyState({ title, text, action }) {
   return (
     <div className="empty">
-      <img src="/floral.png" alt="" width="90" className="empty-floral" />
+      <img src={asset('floral.png')} alt="" width="90" className="empty-floral" />
       <h3>{title}</h3>
       {text && <p className="muted">{text}</p>}
       {action}

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { supabase } from '@shared/supabase.js'
 import { Field } from '@shared/ui.jsx'
-import { errorMessage } from '@shared/utils.js'
+import { errorMessage, asset } from '@shared/utils.js'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -21,7 +21,7 @@ export default function Login() {
   return (
     <div className="login-page">
       <form className="login-card" onSubmit={submit}>
-        <img src="/logo-512.png" alt="The Frame Story" width="140" height="140" className="login-logo" />
+        <img src={asset('logo-512.png')} alt="The Frame Story" width="140" height="140" className="login-logo" />
         <h1>Admin sign in</h1>
         <Field label="Email">
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="username" required />

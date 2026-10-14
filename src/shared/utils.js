@@ -123,3 +123,9 @@ export function errorMessage(err) {
   if (typeof err === 'string') return err
   return err.message || err.error_description || 'Something went wrong. Please try again.'
 }
+
+// Path to a file in /public that also works when the site lives in a sub-folder
+// (e.g. GitHub Pages: /frame_story/).
+export function asset(name) {
+  return import.meta.env.BASE_URL + name
+}

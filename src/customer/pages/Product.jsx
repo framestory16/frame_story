@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { supabase } from '@shared/supabase.js'
-import { formatPrice, priceLabel } from '@shared/utils.js'
+import { formatPrice, priceLabel, asset } from '@shared/utils.js'
 import { Spinner } from '@shared/ui.jsx'
 import { IconUpload, IconHeart, IconPhone, IconArrowRight } from '@shared/icons.jsx'
 import { useQuery, PRODUCT_FIELDS } from '../store.jsx'
@@ -55,7 +55,7 @@ export default function Product() {
       </section>
     )
 
-  const images = product.images?.length ? product.images : ['/logo-1024.jpg']
+  const images = product.images?.length ? product.images : [asset('logo-1024.jpg')]
   const hasSizes = product.sizes?.length > 0
   const selected = hasSizes ? product.sizes.find((s) => s.label === size) : null
   const price = hasSizes ? (selected ? selected.price : null) : product.price

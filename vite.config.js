@@ -8,9 +8,13 @@ const here = dirname(fileURLToPath(import.meta.url))
 // One repo, two separate websites:
 //   --mode customer → src/customer → dist/customer  (public shop)
 //   --mode admin    → src/admin    → dist/admin     (admin portal)
+// PAGES_BASE (e.g. "/frame_story/") is set by the GitHub Pages workflow;
+// the shop is served at PAGES_BASE and the admin at PAGES_BASE + "admin/".
 export default defineConfig(({ mode }) => {
   const site = mode === 'admin' ? 'admin' : 'customer'
+  const pagesBase = process.env.PAGES_BASE
   return {
+    base: !pagesBase ? '/' : site === 'admin' ? `${pagesBase}admin/` : pagesBase,
     root: resolve(here, 'src', site),
     publicDir: resolve(here, 'public'),
     envDir: here,

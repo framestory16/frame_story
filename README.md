@@ -9,7 +9,12 @@ One repo, two websites:
 | **Shop** (customers) | `src/customer` | `npm run build:customer` | `dist/customer` |
 | **Admin** (owner only) | `src/admin` | `npm run build:admin` | `dist/admin` |
 
-Everything runs on free plans: **Supabase** (database, login, photo storage) + **Cloudflare Pages** (hosting).
+Everything runs on free plans: **Supabase** (database, login, photo storage) + **GitHub Pages** (hosting).
+
+| | Live address |
+|---|---|
+| Shop | https://framestory16.github.io/frame_story/ |
+| Admin | https://framestory16.github.io/frame_story/admin/ |
 
 ---
 
@@ -31,37 +36,30 @@ Create the user in **Authentication → Users**, then run in SQL Editor:
 insert into public.admins (user_id) select id from auth.users where email = 'their@email.com';
 ```
 
-## 2. Hosting on Cloudflare Pages (free)
+## 2. Hosting on GitHub Pages (free)
 
-Do this twice — once for the shop, once for admin:
+The repo must be **public** (free GitHub Pages requirement — no secrets are stored in it).
 
-1. [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages → Create → Pages → Connect to Git**
-   (if it offers a Worker, look for “Looking to deploy Pages? Get started”).
-2. Pick the `frame_story` repo.
-3. Settings:
+1. Repo → **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. Push to `main`. [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds both sites and
+   publishes them (watch progress in the **Actions** tab, ~1–2 minutes).
+3. In the admin portal → **Settings → Shop website address**, paste the shop URL.
 
-   | | Shop | Admin |
-   |---|---|---|
-   | Project name | `theframestory` | `theframestory-admin` |
-   | Framework preset | None | None |
-   | Build command | `npm run build:customer` | `npm run build:admin` |
-   | Build output directory | `dist/customer` | `dist/admin` |
-
-4. **Save and Deploy.** Every `git push` to `main` redeploys both sites automatically.
-
-Then in the admin portal → **Settings → Shop website address**, paste the shop URL.
+Every later `git push` redeploys automatically. The admin uses `#` links (e.g. `/admin/#/orders`)
+because GitHub Pages can't route sub-pages for single-page apps.
 
 ## 3. Keep Supabase awake (important)
 
 Free Supabase projects **pause after 7 days with no activity** (data is kept; you can click
-*Restore* in the dashboard). Two pings prevent this:
+*Restore* in the dashboard).
 
-1. **cron-job.org (main)** — free account → *Create cronjob*:
+1. **GitHub Action (automatic)** — [`.github/workflows/keepalive.yml`](.github/workflows/keepalive.yml)
+   runs on GitHub's servers every 2 days and pings the database. It also re-enables itself so GitHub's
+   “60 days of inactivity” rule never switches it off. Check runs in the **Actions** tab.
+2. **cron-job.org (optional backup)** — free account → *Create cronjob*:
    - URL: `https://qriipkojtrgerlvexszo.supabase.co/rest/v1/settings?select=id&limit=1`
    - Schedule: every 2 days
    - Advanced → Headers: `apikey` = `sb_publishable_3-WiHPpqxUeDNlZfwHpGpg_p7ClzRsP`
-2. **GitHub Action (backup)** — [`.github/workflows/keepalive.yml`](.github/workflows/keepalive.yml) runs every 2 days.
-   Check it under the repo’s **Actions** tab.
 
 ## 4. Run locally
 

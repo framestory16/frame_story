@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { supabase } from '@shared/supabase.js'
-import { instagramUrl } from '@shared/utils.js'
+import { instagramUrl, asset } from '@shared/utils.js'
 import { IconInstagram, IconArrowRight, IconFrame, IconUpload, IconHeart, IconImage } from '@shared/icons.jsx'
 import { useShop, useQuery, PRODUCT_FIELDS } from '../store.jsx'
 import {
@@ -33,7 +33,7 @@ function Polaroid({ src, caption, className, contain = false }) {
           <img src={src} alt="" className={contain ? 'contain' : ''} />
         ) : (
           <div className="polaroid-fill">
-            <img src="/floral.png" alt="" />
+            <img src={asset('floral.png')} alt="" />
           </div>
         )}
       </div>
@@ -103,12 +103,12 @@ export default function Home() {
           </div>
 
           <div className="hero-art" aria-hidden="true">
-            <img src="/floral.png" alt="" className="hero-floral f1" />
-            <img src="/floral.png" alt="" className="hero-floral f2" />
+            <img src={asset('floral.png')} alt="" className="hero-floral f1" />
+            <img src={asset('floral.png')} alt="" className="hero-floral f2" />
             <div className="hero-frame-lines" />
             <Polaroid
               className="p-main"
-              src={heroMain || '/logo-1024.jpg'}
+              src={heroMain || asset('logo-1024.jpg')}
               contain={!heroMain}
               caption="every frame tells a story"
             />
@@ -189,8 +189,8 @@ export default function Home() {
 
       {/* ---------- Quote ---------- */}
       <section className="quote-band">
-        <img src="/floral.png" alt="" className="quote-floral left" aria-hidden="true" loading="lazy" />
-        <img src="/floral.png" alt="" className="quote-floral right" aria-hidden="true" loading="lazy" />
+        <img src={asset('floral.png')} alt="" className="quote-floral left" aria-hidden="true" loading="lazy" />
+        <img src={asset('floral.png')} alt="" className="quote-floral right" aria-hidden="true" loading="lazy" />
         <Reveal className="container quote-inner">
           <span className="eyebrow">The Frame Story</span>
           <blockquote>“Some moments deserve more than a phone screen.”</blockquote>
@@ -239,7 +239,7 @@ export default function Home() {
                 <Polaroid
                   key={i}
                   className={`ig-p ig-p${i}`}
-                  src={productPics[i] || (i === 1 ? '/logo-512.png' : null)}
+                  src={productPics[i] || (i === 1 ? asset('logo-512.png') : null)}
                   contain={!productPics[i] && i === 1}
                   caption={['memories', 'the frame story', 'with love'][i]}
                 />

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, Navigate, NavLink } from 'react-router-dom'
 import { supabase } from '@shared/supabase.js'
+import { asset } from '@shared/utils.js'
 import { Spinner } from '@shared/ui.jsx'
 import { IconBox, IconGrid, IconFrame, IconSettings, IconLogout, IconExternal } from '@shared/icons.jsx'
 import Login from './Login.jsx'
@@ -73,7 +74,7 @@ function Shell({ email }) {
     <div className="admin">
       <aside className="sidebar">
         <div className="side-brand">
-          <img src="/logo-192.png" alt="" width="44" height="44" />
+          <img src={asset('logo-192.png')} alt="" width="44" height="44" />
           <div>
             <strong>The Frame Story</strong>
             <span>Admin</span>

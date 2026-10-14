@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { supabase } from '@shared/supabase.js'
+import { asset } from '@shared/utils.js'
 import { useShop, useQuery, PRODUCT_FIELDS } from '../store.jsx'
 import { ProductGrid, SkeletonGrid, EmptyState } from '../components.jsx'
 import { Spinner } from '@shared/ui.jsx'
@@ -44,7 +45,7 @@ export default function Category() {
     <>
       <section className="cat-hero">
         {category.image_url && <img src={category.image_url} alt="" className="cat-hero-bg" />}
-        <img src="/floral.png" alt="" className="cat-hero-floral" aria-hidden="true" />
+        <img src={asset('floral.png')} alt="" className="cat-hero-floral" aria-hidden="true" />
         <div className="container cat-hero-inner">
           <nav className="crumbs" aria-label="Breadcrumb">
             <Link to="/">Home</Link> <span>/</span> <span className="crumb-current">{category.name}</span>
