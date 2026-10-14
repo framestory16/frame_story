@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { Header, Footer } from './components.jsx'
+import { Header, Footer, FloatingInstagram } from './components.jsx'
 import Home from './pages/Home.jsx'
 import Shop from './pages/Shop.jsx'
 import Category from './pages/Category.jsx'
@@ -30,6 +30,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <FloatingInstagram />
     </>
   )
 }

@@ -29,6 +29,7 @@ export default function Shop() {
         <div className="page-head">
           <span className="eyebrow">Shop</span>
           <h1>All our creations</h1>
+          <p className="muted">Handmade frames, polaroids and gifts — personalised with your photos.</p>
         </div>
 
         {categories.length > 0 && (

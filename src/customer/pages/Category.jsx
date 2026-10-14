@@ -44,12 +44,19 @@ export default function Category() {
     <>
       <section className="cat-hero">
         {category.image_url && <img src={category.image_url} alt="" className="cat-hero-bg" />}
+        <img src="/floral.png" alt="" className="cat-hero-floral" aria-hidden="true" />
         <div className="container cat-hero-inner">
           <nav className="crumbs" aria-label="Breadcrumb">
-            <Link to="/">Home</Link> / <span>{category.name}</span>
+            <Link to="/">Home</Link> <span>/</span> <span className="crumb-current">{category.name}</span>
           </nav>
+          <span className="eyebrow">Collection</span>
           <h1>{category.name}</h1>
           {category.description && <p>{category.description}</p>}
+          {!products.loading && (
+            <span className="cat-count">
+              {products.data?.length || 0} design{products.data?.length === 1 ? '' : 's'}
+            </span>
+          )}
         </div>
       </section>
 

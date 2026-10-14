@@ -28,6 +28,7 @@
 
   --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
   --font-body: 'Jost', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-script: 'Caveat', 'Segoe Script', cursive;
 }
 
 *,
@@ -149,6 +150,19 @@ textarea {
 }
 .btn-danger:not(:disabled):hover {
   background: #fdf1f0;
+}
+.btn-light {
+  background: #fff;
+  color: var(--ink);
+}
+.btn-light:not(:disabled):hover {
+  transform: translateY(-1px);
+  background: var(--blush-mist);
+}
+.btn-lg {
+  min-height: 52px;
+  padding: 0 28px;
+  font-size: 16px;
 }
 .btn-sm {
   min-height: 36px;
